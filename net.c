@@ -22,6 +22,8 @@
 //
 int net_connect(const char *_host, const int port, int *error_out) {
     int err, sock;
+
+    *error_out = 0; //init it
     
     struct sockaddr_in           serv;
     struct hostent       *host = NULL;

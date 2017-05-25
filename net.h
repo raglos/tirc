@@ -5,4 +5,6 @@
 #define NETEHOST   2
 #define NETECON    3
 
+int net_connect (const char *, int, int*);
+
 #endif
