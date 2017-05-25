@@ -50,7 +50,7 @@ int net_connect(const char *_host, const int port, int *error_out) {
 // just closes it really
 // if close() was interrupted or something, it will return 1 else 0
 //
-int net_disconnect (int sock) {
+int net_disconnect (const int sock) {
     int err;
     err = close (sock);
     if (!err) return 0;
