@@ -6,5 +6,6 @@
 #define NETECON    3
 
 int net_connect (const char *, int, int*);
+int net_disconnect (int);
 
 #endif
