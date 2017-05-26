@@ -56,3 +56,23 @@ int net_disconnect (const int sock) {
     if (!err) return 0;
     else      return 1;
 }
+
+//
+// tries to receive data from the socket.
+//
+int net_receive (const int sock, char *buf, const size_t bufsiz) {
+    int err;
+    err = recv (sock, buf, bufsiz, 0);
+    if (err < 1) fprintf(stderr, "net_receive() error\n");
+    return err;
+}
+
+//
+// tries to send data to the socket.
+//
+int net_send (const int sock, const char *buf, const size_t len) {
+    int err;
+    err = send (sock, buf, len, 0);
+    if (err < 0) fprintf(stderr, "net_send() error\n");
+    return err;
+}
