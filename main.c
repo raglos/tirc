@@ -3,8 +3,7 @@
 #include <string.h>
 #include "net.h"
 #include <unistd.h>
-
-const char *m_pong = "PONG :";
+#include "pong.h"
 
 int main (int argc, char *argv[]) {
 
@@ -20,22 +19,14 @@ int main (int argc, char *argv[]) {
 
     net_send (sock, str1, strlen(str1));
     net_send (sock, str2, strlen(str2));
-    
-    int ponged = 0;    
 
     char buf[1024+1];
     while (net_receive(sock, buf, 1024)) {
-        if (ponged == 1) {
-            net_send (sock, str3, strlen(str3));
-            ponged = 2;    
-        }
-
         printf ("%s\n", buf);
-        //PING: 12345678 -> PONG: 12345678
-        if (buf[0] == 'P' && strlen(buf) < 30) {
-            (void) memmove(buf, m_pong, strlen(m_pong));
-            net_send (sock, buf, strlen(buf)); 
-            ponged++;
+        if (!is_ping  (buf)) {
+            make_pong (buf);
+            printf ("->%s\n", buf);
+            net_send  (sock, buf, strlen(buf));
         }
         memset (buf, '\0', 1024);
     }
