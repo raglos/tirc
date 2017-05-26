@@ -1,0 +1,5 @@
+put more stuff in state
+e
+clean up code
+replace calloc/free with char[] and memset()
+

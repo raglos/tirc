@@ -1,17 +1,17 @@
 #include "pong.h"
 #include <string.h>
-
+#include <stdio.h>
 //
 // determines if str is a ping from the server
 //
 int is_ping (char *str) {
-    char buf[7];
-    strncpy(str, buf, 6);
-    if (!strcmp(buf, "PING :")) {
-        //it is a ping
-        return 0;
+    const char *vs = "PING :";
+    int i = 0;
+    for (i; i < 6; i++) {
+//        printf ("%c - %c\n", vs[i], str[i]);
+        if (vs[i] != str[i]) return 1;
     }
-    return 1;
+    return 0;
 }
 
 //
